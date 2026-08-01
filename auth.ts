@@ -1,10 +1,12 @@
+import NextAuth from "next-auth"
+
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { connectToDatabase } from "./db";
-import UserModel from "../models/User";
+import { connectToDatabase } from "./lib/db";
+import User from "./models/User";
 
-export const authOptions: NextAuthOptions = {
+export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -19,7 +21,7 @@ export const authOptions: NextAuthOptions = {
 
                 try {
                     await connectToDatabase();
-                    const user = await UserModel.findOne({ email: credentials.email });
+                    const user = await User.findOne({ email: credentials.email });
 
                     if (!user) {
                         throw new Error("No user found with this email");
@@ -68,4 +70,4 @@ export const authOptions: NextAuthOptions = {
         maxAge: 30 * 24 * 60 * 60,
     },
     secret: process.env.NEXTAUTH_SECRET,
-};
+});

@@ -3,6 +3,7 @@ import { connectToDatabase } from "@/lib/db";
 import Video, { IVideo } from "@/models/Video";
 import { auth } from "@/auth";
 
+
 export async function GET() {
   try {
     await connectToDatabase();
@@ -24,6 +25,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    
     const session = await auth();
 
     if (!session?.user) {

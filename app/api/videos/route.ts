@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 
 export async function GET() {
   try {
+
     await connectToDatabase();
     const videos = await Video.find({}).sort({ createdAt: -1 }).lean();
 
@@ -25,7 +26,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    
+
     const session = await auth();
 
     if (!session?.user) {

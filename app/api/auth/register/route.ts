@@ -3,6 +3,7 @@ import { connectToDatabase } from "@/lib/db";
 import User from "@/models/User";
 
 export async function POST(request: NextRequest) {
+
   try {
 
     const { email, password } = await request.json();
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
       { message: "User registered successfully" },
       { status: 201 }
     );
-    
+
   } catch (error) {
     console.error("Registration error:", error);
     return NextResponse.json(

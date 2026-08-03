@@ -2,9 +2,8 @@ import { NextResponse } from "next/server";
 import { auth } from "./auth";
 
 export const proxy = auth((req: any) => {
-    const { pathname } = req.nextUrl;
 
-    // Logged-in users should not access login/register
+    const { pathname } = req.nextUrl;
     if (
         req.auth &&
         (pathname === "/login" || pathname === "/register")

@@ -32,6 +32,7 @@ export default function VideoUploadForm() {
             videoUrl: "",
             thumbnailUrl: "",
         },
+        
     });
 
     const handleUploadSuccess = (response: any) => {
